@@ -1,3 +1,7 @@
+--                     AGGREGATION ASSIGNMENT CODE
+
+
+
 use world;
 
 SELECT * FROM world.city;
