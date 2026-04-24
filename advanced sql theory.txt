@@ -1,0 +1,118 @@
+-- Q1. What is a Common Table Expression (CTE), and how does it improve SQL query readability?
+-- Answer:
+-- A Common Table Expression (CTE) is a temporary result set defined using the WITH clause that can be referenced within a SQL query. 
+-- It helps break complex queries into smaller, more manageable parts.
+-- syntax:
+-- WITH cte_name AS (
+--    SELECT column1, column2
+--    FROM table_name)
+-- SELECT * FROM cte_name;
+
+-- How it improves readability:
+-- Simplifies complex queries by dividing them into logical steps
+-- Makes SQL code easier to understand and maintain
+-- Avoids repeating the same subquery multiple times
+-- Improves debugging and testing
+
+Q2. Why are some views updatable while others are read-only? Explain with an example. 
+Answer:
+A view is a virtual table based on a SQL query. 
+Some views are updatable, meaning we can perform INSERT, UPDATE OR DELETE OPERATIONS on them, while others are read-only.
+
+Updatable Views:
+A view is updatable when:
+1. It is based on a single table
+2. It does not contain complex expressions or calculations
+3. It does not use GROUP BY, JOIN, DISTINCT, or aggregate functions
+Example:
+CREATE VIEW view_SimpleProducts AS
+SELECT ProductID, ProductName, Price
+FROM Products;
+This view is updatable because it is based on a single table without any complex operations.
+
+Read-Only Views:
+1. It uses JOINs
+2. It contains DISTINCT or complex expressions
+3. It includes GROUP BY or aggregate functions (SUM, AVG, etc.)
+Example:
+CREATE VIEW vw_CategorySummary AS
+SELECT Category, COUNT(*) AS TotalProducts
+FROM Products
+GROUP BY Category;
+This view is read-only.
+
+CONCLUSION:
+Views are updatable only when SQL can clearly map the changes back to the original table. 
+Complex queries make this mapping impossible, so such views become read-only.
+
+
+Q3. What advantages do stored procedures offer compared to writing raw SQL queries repeatedly? 
+Answer:
+A stored procedure is a precompiled collection of SQL statements stored in the database that can be executed whenever needed.
+
+          -- Advantages of Stored Procedures: --
+1. Reusability:
+   ~ Stored procedures can be used multiple times without rewriting the same SQL queries
+   ~ Reduces duplication of code
+2. Better Performance
+   ~ Stored procedures are precompiled, so execution is faster
+   ~ Reduces query parsing and execution time
+3. Improved Security
+  ~ Users can be given permission to execute the procedure without accessing the underlying tables
+  ~ Helps protect sensitive data
+4. Easy Maintenance
+  ~ Changes can be made in one place without modifying multiple queries
+  ~ Simplifies updates and bug fixes
+5. Reduced Network Traffic
+  ~ Instead of sending multiple SQL queries, only the procedure call is sent
+  ~ Improves efficiency in client-server communication
+
+
+Q4. What is the purpose of triggers in a database? Mention one use case where a trigger is essential. 
+Answer:
+A trigger is a special type of stored program in a database that automatically executes in response to 
+specific events such as INSERT, UPDATE, or DELETE on a table.
+Purpose of Triggers:
+  To automate actions when data changes
+  To maintain data integrity
+  To enforce business rules
+  To track or audit changes in a table
+Types of Triggers:
+  BEFORE Trigger → Executes before the event
+  AFTER Trigger → Executes after the event
+Example Use Case:
+-- Maintaining an audit log of deleted records
+    When a record is deleted from a table, a trigger can automatically store 
+    that record in an archive table for future reference.
+
+Conclusion:
+Triggers help automate important database operations and are essential for tasks 
+like auditing, validation, and maintaining consistency.
+
+
+Q5. Explain the need for data modelling and normalization when designing a database.
+Answer:
+
+~Data Modelling:
+  Data modelling is the process of designing the structure of a database, including tables, relationships, and constraints.
+~Need for Data Modelling:
+  Helps in designing a clear database structure
+  Defines relationships between different tables
+  Ensures efficient data storage and retrieval
+  Improves scalability and maintainability
+
+~Normalization:
+  Normalization is the process of organizing data in a database to reduce redundancy and improve data integrity.
+~Need for Normalization:
+  Eliminates duplicate data (redundancy)
+  Ensures data consistency
+  Prevents anomalies (insert, update, delete issues)
+  Makes database more efficient
+
+
+
+
+
+
+
+
