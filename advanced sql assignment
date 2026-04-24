@@ -110,6 +110,25 @@ Answer:
   Makes database more efficient
 
 
+--Q6. Write a CTE to calculate the total revenue for each product 
+--(Revenues = Price × Quantity), and return only products where  revenue > 3000
+Answer:
+
+WITH RevenueCTE AS (
+    SELECT 
+        p.ProductID,
+        p.ProductName,
+        SUM(p.Price * s.Quantity) AS Revenue
+    FROM Products p
+    JOIN Sales s 
+        ON p.ProductID = s.ProductID
+    GROUP BY p.ProductID, p.ProductName
+)
+
+SELECT *
+FROM RevenueCTE
+WHERE Revenue > 3000;
+
 
 
 
